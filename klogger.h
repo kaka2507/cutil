@@ -14,6 +14,7 @@
 #include <list>
 #include <stdint.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define INIT_LOG(filename, level, rotate_num, size_limit, log_dir) \
 { Logger::Instance().Init(filename, level, rotate_num, size_limit, log_dir);}

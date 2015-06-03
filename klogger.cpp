@@ -22,8 +22,15 @@ void Logger::Init(const std::string& filename, int level, uint32_t rotate_num, l
 
     
     if(log_dir.empty()) {
+        #ifdef __APPLE__
+        char tmp[1024];
+        getcwd(tmp, 1024);
+        _path_dir.clear();
+        _path_dir.append(tmp, strlen(tmp));
+        #elif __linux__
         _path_dir = get_current_dir_name();
         _path_dir = _path_dir + "/../log/";
+        #endif
     } else {
         _path_dir = log_dir;
     }
@@ -101,7 +108,9 @@ void Logger::Log(int level, const char* sourcefilename, int line, const char* ms
         try {
             _file << date << ":" << Level(level) << ": " << sourcefilename << ":" << line << ":" << dest << std::endl;
         } catch (std::exception& e) {
+            #ifdef CHECK_LOG
             check_log_file << date << "cannot write to file" << std::endl;
+            #endif
         }
     }
 }
