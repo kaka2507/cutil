@@ -8,7 +8,7 @@
 
 /* get current time in second */
 inline uint32_t getSTime() {
-   	return time();
+   	return time(0);
 }
 
 /* get current time in millisecond*/

@@ -33,9 +33,9 @@ void Daemonize(const char *cmd)
     setsid();
 
     // Ignore signals that may cause an unexpected exit due to external errors.
-    if (signal(SIGINT, sig_handler) == SIG_ERR)
+    if (signal(SIGINT, SigHandler) == SIG_ERR)
         printf("can't catch SIGINT\n");
-    if (signal(SIGHUP, sig_handler) == SIG_ERR)
+    if (signal(SIGHUP, SigHandler) == SIG_ERR)
         printf("can't catch SIGHUP\n");
     if (signal(SIGPIPE, SIG_IGN) == SIG_ERR)
         printf("can't catch SIGPIPE\n");
@@ -45,9 +45,9 @@ void Daemonize(const char *cmd)
         printf("can't catch SIGTTOU\n");
     if (signal(SIGCHLD, SIG_IGN) == SIG_ERR)
         printf("can't catch SIGCHLD\n");
-    if (signal(SIGTERM, sig_handler) == SIG_ERR)
+    if (signal(SIGTERM, SigHandler) == SIG_ERR)
         printf("can't catch SIGTERM\n");
-    if (signal(SIGUSR1, sig_handler) == SIG_ERR)
+    if (signal(SIGUSR1, SigHandler) == SIG_ERR)
         printf("can't catch SIGUSR1\n");
   
     //Ensure future opens won't allocate controlling TTYs.  
